@@ -15,4 +15,9 @@ ctx.fillStyle = "green"
 ctx.fill()
 ctx.closePath()
 
+ctx.beginPath()
+ctx.rect(160, 10, 100, 40)
+ctx.stroke()
+ctx.closePath()
+
 })
