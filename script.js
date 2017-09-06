@@ -72,6 +72,7 @@ function draw() {
   drawBall()
   drawPaddle()
   drawBricks()
+  collisionDetection()
 
   if(x + dx > canvas.width || x + dx < 0) {
     dx = -dx
@@ -119,6 +120,17 @@ function keyUpHandler(e) {
   }
   else if(e.keyCode == 37) {
     leftPressed = false
+  }
+}
+
+function collisionDetection() {
+  for(c=0; c<brickColumnCount; c++) {
+    for(r=0; r<brickRowCount; r++) {
+      var b = bricks[c][r]
+      if(x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+        dy = -dy
+      }
+    }
   }
 }
 
