@@ -36,6 +36,8 @@ for(c=0; c<brickColumnCount; c++) {
 
 var score = 0
 
+var lives = 3
+
 function drawBall() {
   ctx.beginPath()
   ctx.arc(x, y, ballRadius, 0, Math.PI*2)
@@ -75,6 +77,7 @@ function draw() {
   drawBall()
   drawPaddle()
   drawScore()
+  drawLives()
   drawBricks()
   collisionDetection()
 
@@ -89,8 +92,18 @@ function draw() {
         dy = -dy
       }
       else {
-        alert("Game over.")
-        document.location.reload()
+        lives--
+        if(!lives) {
+          alert("Game over.")
+          document.location.reload()
+        }
+        else {
+          x = canvas.width / 2
+          y = canvas.height - 30
+          dx = 2
+          dy = 2
+          paddleX = (canvas.width-paddleWidth) / 2
+        }
       }
   }
 
@@ -103,6 +116,8 @@ function draw() {
   else if(leftPressed && paddleX > 0) {
     paddleX -= 7
   }
+
+  requestAnimationFrame(draw)
 
 }
 
@@ -155,11 +170,17 @@ function collisionDetection() {
 }
 
 function drawScore() {
-  ctx.font = "17px Helvetica"
+  ctx.font = "16px Helvetica"
   ctx.fillStyle = "#0095DD"
   ctx.fillText("Score: " + score, 8, 20)
 }
 
-setInterval(draw, 10)
+function drawLives() {
+  ctx.font = "16px Helvetica"
+  ctx.fillStyle = "#0095DD"
+  ctx.fillText("Lives: " + lives, canvas.width - 65, 20)
+}
+
+draw()
 
 })
