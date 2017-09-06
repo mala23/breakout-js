@@ -43,8 +43,11 @@ function draw() {
     dx = -dx
   }
 
-  if(y + dy > canvas.height || y + dy < 0) {
+  if(y + dy > canvas.height {
     dy = -dy
+  } else if(y + dy > canvas.height-ballRadius) {
+    alert("Game over.")
+    document.location.reload()
   }
 
   x += dx
